@@ -7,8 +7,9 @@ export default {
       dark: "#111827",
       darkSecondary: "#1f2937",
       light: "#fafafa",
+      accentColor: "#1d4ed8",
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

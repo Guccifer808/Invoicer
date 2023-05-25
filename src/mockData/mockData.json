@@ -1,0 +1,262 @@
+
+[
+    {
+    "id": "PY4532",
+    "createdAt": "2023-05-23",
+    "paymentDue": "2023-06-22",
+    "description": "Mobile App Development",
+    "paymentTerms": 30,
+    "clientName": "Emily Johnson",
+    "clientEmail": "emily.johnson@example.com",
+    "status": "pending",
+    "senderAddress": {
+    "street": "42 Park Avenue",
+    "city": "New York",
+    "postCode": "10001",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "5678 Elm Street",
+    "city": "San Francisco",
+    "postCode": "94102",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "App Design",
+    "quantity": 1,
+    "price": 5000.00,
+    "total": 5000.00
+    },
+    {
+    "name": "App Development",
+    "quantity": 1,
+    "price": 8000.00,
+    "total": 8000.00
+    }
+    ],
+    "total": 13000.00
+    },
+    {
+    "id": "BC2341",
+    "createdAt": "2023-05-20",
+    "paymentDue": "2023-06-19",
+    "description": "Social Media Marketing",
+    "paymentTerms": 30,
+    "clientName": "Michael Brown",
+    "clientEmail": "michael.brown@example.com",
+    "status": "pending",
+    "senderAddress": {
+    "street": "123 Main Street",
+    "city": "Los Angeles",
+    "postCode": "90001",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "456 Elm Street",
+    "city": "Seattle",
+    "postCode": "98101",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Social Media Strategy",
+    "quantity": 1,
+    "price": 2500.00,
+    "total": 2500.00
+    },
+    {
+    "name": "Social Media Campaign",
+    "quantity": 1,
+    "price": 4000.00,
+    "total": 4000.00
+    }
+    ],
+    "total": 6500.00
+    },
+    {
+    "id": "JK7689",
+    "createdAt": "2023-05-18",
+    "paymentDue": "2023-06-17",
+    "description": "E-commerce Website Development",
+    "paymentTerms": 30,
+    "clientName": "David Thompson",
+    "clientEmail": "david.thompson@example.com",
+    "status": "paid",
+    "senderAddress": {
+    "street": "789 Elm Street",
+    "city": "Chicago",
+    "postCode": "60601",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "101 Main Street",
+    "city": "Dallas",
+    "postCode": "75201",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Website Design",
+    "quantity": 1,
+    "price": 6000.00,
+    "total": 6000.00
+    },
+    {
+    "name": "Website Development",
+    "quantity": 1,
+    "price": 9000.00,
+    "total": 9000.00
+    }
+    ],
+    "total": 15000.00
+    },
+    {
+    "id": "PL6543",
+    "createdAt": "2023-05-15",
+    "paymentDue": "2023-06-14",
+    "description": "Search Engine Optimization",
+    "paymentTerms": 30,
+    "clientName": "Sophia Rodriguez",
+    "clientEmail": "sophia.rodriguez@example.com",
+    "status": "pending",
+    "senderAddress": {
+    "street": "246 Park Avenue",
+    "city": "San Francisco",
+    "postCode": "94105",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "789 Main Street",
+    "city": "Los Angeles",
+    "postCode": "90001",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Keyword Research",
+    "quantity": 1,
+    "price": 3000.00,
+    "total": 3000.00
+    },
+    {
+    "name": "On-page Optimization",
+    "quantity": 1,
+    "price": 4000.00,
+    "total": 4000.00
+    }
+    ],
+    "total": 7000.00
+    },
+    {
+    "id": "WQ0987",
+    "createdAt": "2023-05-12",
+    "paymentDue": "2023-06-11",
+    "description": "Content Writing",
+    "paymentTerms": 30,
+    "clientName": "Oliver Wilson",
+    "clientEmail": "oliver.wilson@example.com",
+    "status": "paid",
+    "senderAddress": {
+    "street": "135 Elm Street",
+    "city": "New York",
+    "postCode": "10001",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "456 Main Street",
+    "city": "Boston",
+    "postCode": "02101",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Blog Writing",
+    "quantity": 5,
+    "price": 200.00,
+    "total": 1000.00
+    },
+    {
+    "name": "Website Copywriting",
+    "quantity": 1,
+    "price": 2500.00,
+    "total": 2500.00
+    }
+    ],
+    "total": 3500.00
+    },
+    {
+    "id": "MN7654",
+    "createdAt": "2023-05-09",
+    "paymentDue": "2023-06-08",
+    "description": "Video Production",
+    "paymentTerms": 30,
+    "clientName": "Daniel Smith",
+    "clientEmail": "daniel.smith@example.com",
+    "status": "pending",
+    "senderAddress": {
+    "street": "567 Main Street",
+    "city": "Los Angeles",
+    "postCode": "90001",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "890 Elm Street",
+    "city": "San Francisco",
+    "postCode": "94102",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Video Shooting",
+    "quantity": 1,
+    "price": 5000.00,
+    "total": 5000.00
+    },
+    {
+    "name": "Video Editing",
+    "quantity": 1,
+    "price": 4000.00,
+    "total": 4000.00
+    }
+    ],
+    "total": 9000.00
+    },
+    {
+    "id": "RT4372",
+    "createdAt": "2023-05-06",
+    "paymentDue": "2023-06-05",
+    "description": "Graphic Design",
+    "paymentTerms": 30,
+    "clientName": "Lily Davis",
+    "clientEmail": "lily.davis@example.com",
+    "status": "paid",
+    "senderAddress": {
+    "street": "789 Elm Street",
+    "city": "Chicago",
+    "postCode": "60601",
+    "country": "United States of America"
+    },
+    "clientAddress": {
+    "street": "101 Main Street",
+    "city": "Dallas",
+    "postCode": "75201",
+    "country": "United States of America"
+    },
+    "items": [
+    {
+    "name": "Logo Design",
+    "quantity": 1,
+    "price": 2500.00,
+    "total": 2500.00
+    },
+    {
+    "name": "Brochure Design",
+    "quantity": 1,
+    "price": 3500.00,
+    "total": 3500.00
+    }
+    ],
+    "total": 6000.00
+    }
+    ]
