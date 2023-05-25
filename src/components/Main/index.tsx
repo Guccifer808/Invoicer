@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import arrowDown from "../../assets/icon-arrow-d.svg";
-import plus from "../../assets/plus.png";
+import arrowDown from "src/assets/icon-arrow-d.svg";
+import plus from "src/assets/plus.png";
 import InvoiceCard from "../InvoiceCard";
 import { useDispatch, useSelector } from "react-redux";
-import invoiceSlice from "../../redux/invoiceSlice";
+import invoiceSlice from "src/redux/invoiceSlice";
 import CreateInvoice from "../CreateInvoice";
 import { useLocation } from "react-router-dom";
-import { RootState } from "../../redux/store";
+import { RootState } from "src/redux/store";
 interface Invoice {
   id: string;
   // Add other properties from your invoice type

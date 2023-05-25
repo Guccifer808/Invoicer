@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import mockData from '../mockData/mockData.json';
+import mockData from 'src/mockData/mockData.json';
 import moment from "moment";
-import getForwardDate from "../utils/forwardDate";
-import generateID from "../utils/generateId";
+import getForwardDate from "src/utils/forwardDate";
+import generateID from "src/utils/generateId";
 
-import {Invoice, InvoiceItem, InvoiceState} from '../types/types'
+import {Invoice, InvoiceItem, InvoiceState} from 'src/types/types'
 
 const today = moment().format("YYYY-MM-DD");
 

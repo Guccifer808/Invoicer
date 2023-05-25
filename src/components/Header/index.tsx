@@ -1,10 +1,10 @@
-import useDarkMode from "../../hooks/useDarkMode";
+import useDarkMode from "src/hooks/useDarkMode";
 import { motion } from "framer-motion";
 
-import logo from "../../assets/logo.png";
-import profilePic from "../../assets/profilePic.png";
-import moon from "../../assets/icon-moon.svg";
-import sun from "../../assets/icon-sun.svg";
+import logo from "src/assets/logo.png";
+import profilePic from "src/assets/profilePic.png";
+import moon from "src/assets/icon-moon.svg";
+import sun from "src/assets/icon-sun.svg";
 
 const Header: React.FC = () => {
   const [colorTheme, setTheme] = useDarkMode();

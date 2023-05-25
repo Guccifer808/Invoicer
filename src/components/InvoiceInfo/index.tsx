@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import leftArrow from "../../assets/icon-arrow-l.svg";
+import leftArrow from "src/assets/icon-arrow-l.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import PaidStatus from "../PaidStatus";
 import { useDispatch, useSelector } from "react-redux";
-import invoiceSlice from "../../redux/invoiceSlice";
-import formatDate from "../../utils/formatDate";
+
+import formatDate from "src/utils/formatDate";
 import DeleteModal from "../DeleteModal";
 import CreateInvoice from "../CreateInvoice";
-import { Invoice, Item } from "../../types/types";
-import { RootState } from "../../redux/store";
+import { Invoice, Item } from "src/types/types";
+import { RootState } from "src/redux/store";
+import invoiceSlice from "src/redux/invoiceSlice";
 
 interface InvoiceInfoProps {
   onDelete: (id: string) => void;

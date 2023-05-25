@@ -1,8 +1,8 @@
 import PaidStatus from "../PaidStatus";
-import rightArrow from "../../assets/icon-arrow-r.svg";
+import rightArrow from "src/assets/icon-arrow-r.svg";
 import { Link } from "react-router-dom";
 
-import { Invoice } from "../../types/types";
+import { Invoice } from "src/types/types";
 
 type Props = {
   invoice: Invoice;

@@ -3,7 +3,7 @@ import {
   validateItemCount,
   validateItemName,
   validateItemPrice,
-} from "../../utils/createInvoiceValidator";
+} from "src/utils/createInvoiceValidator";
 
 function AddItem({
   itemDetails,

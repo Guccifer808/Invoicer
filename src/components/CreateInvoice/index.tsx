@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import AddItem from "../AddItem";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import invoiceSlice from "../../redux/invoiceSlice";
+import invoiceSlice from "src/redux/invoiceSlice";
 import {
   validateSenderStreetAddress,
   validateSenderPostCode,
@@ -18,7 +18,7 @@ import {
   validateItemPrice,
   validateSenderCountry,
   validateClientCountry,
-} from "../../utils/createInvoiceValidator";
+} from "src/utils/createInvoiceValidator";
 
 interface Props {
   openCreateInvoice: boolean;

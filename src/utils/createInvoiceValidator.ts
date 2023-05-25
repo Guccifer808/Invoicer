@@ -1,4 +1,4 @@
-import { Invoice, Address, Item } from '../types/types';
+import { Invoice, Address, Item } from 'src/types/types';
 
 export function validateSenderStreetAddress(streetAddress: Address['street']) {
   if (!streetAddress.trim()) {
