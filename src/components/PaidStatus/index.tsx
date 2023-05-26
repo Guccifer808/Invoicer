@@ -16,7 +16,7 @@ function PaidStatus({ type }: Props) {
           : type === "pending"
           ? classNames.pending[0]
           : classNames.draft[0]
-      } flex items-center justify-center space-x-2  rounded-lg px-4 py-2`}
+      } flex items-center justify-center space-x-2 rounded-lg px-4 py-2`}
     >
       <div
         className={` h-3 w-3 rounded-full  ${

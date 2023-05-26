@@ -21,18 +21,18 @@ export interface Invoice {
   }
   
   export interface Item {
-    id: string;
     name: string;
     quantity: number;
     price: number;
     total: number;
+    id: string | number;
   }
   export interface InvoiceItem {
     name: string;
     quantity: number;
     price: number;
-    total: number;
-    id: string;
+    total: number | string;
+    id: string | number;
   }
   
   export interface InvoiceState {

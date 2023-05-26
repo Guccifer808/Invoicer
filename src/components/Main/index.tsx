@@ -54,7 +54,7 @@ const Main: React.FC = () => {
 
   return (
     <div>
-      <div className="min-h-screen bg-[#f8f8fb] px-2 py-[34px] duration-300 scrollbar-hide dark:bg-[#141625] md:px-8 lg:px-12 lg:py-[72px]">
+      <div className="bg-light] min-h-screen px-2 py-[34px] duration-300 scrollbar-hide dark:bg-dark md:px-8 lg:px-12 lg:py-[72px]">
         <motion.div
           key={location.pathname}
           initial={{ x: "0" }}
@@ -67,20 +67,20 @@ const Main: React.FC = () => {
 
           <div className="flex max-h-[64px] min-w-full items-center justify-between">
             <div>
-              <h1 className="dark:text-white text-xl font-semibold tracking-wide md:text-2xl lg:text-4xl">
+              <h1 className="text-xl font-semibold tracking-wide dark:text-light md:text-2xl lg:text-4xl">
                 Invoices
               </h1>
-              <p className="text-gray-500 font-light">
+              <p className="font-light text-gray dark:text-light">
                 There are {invoices.length} total invoices.
               </p>
             </div>
 
             <div className="flex max-h-full items-center">
               <div className="flex items-center">
-                <p className="dark:text-white hidden font-medium md:block">
+                <p className="hidden font-medium dark:text-light md:block">
                   Filter by status
                 </p>
-                <p className="dark:text-white font-medium md:hidden">Filter</p>
+                <p className="font-medium dark:text-light md:hidden">Filter</p>
                 <div
                   onClick={() => {
                     setIsDropdown((state) => !state);
@@ -122,7 +122,7 @@ const Main: React.FC = () => {
                         value={item}
                         checked={filterValue === item ? true : false}
                         type="checkbox"
-                        className="accent-[#7c5dfa] hover:accent-[#7c5dfa]"
+                        className="accent-accentColor hover:accent-accentColor"
                       />
                       <p>{item}</p>
                     </div>
@@ -133,13 +133,13 @@ const Main: React.FC = () => {
 
               <button
                 onClick={() => setOpenCreateInvoice(true)}
-                className="ml-4 flex items-center space-x-2 rounded-full bg-[#7c5dfa] px-2 py-2 hover:opacity-80 md:ml-10 md:space-x-3"
+                className="ml-4 flex items-center space-x-2 rounded-full bg-accentColor px-2 py-2 hover:opacity-80 md:ml-10 md:space-x-3"
               >
                 <img src={plus} alt="" />
-                <p className="text-white hidden text-lg font-semibold md:block">
+                <p className="hidden px-2 text-lg font-semibold text-light md:block">
                   New
                 </p>
-                {/* <p className="text-white block text-base font-semibold md:hidden"></p> */}
+                {/* <p className="block text-base font-semibold text-light md:hidden"></p> */}
               </button>
             </div>
           </div>

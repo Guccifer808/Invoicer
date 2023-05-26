@@ -19,20 +19,13 @@ import {
   validateSenderCountry,
   validateClientCountry,
 } from "src/utils/createInvoiceValidator";
+import { InvoiceItem } from "src/types/types";
 
 interface Props {
   openCreateInvoice: boolean;
   setOpenCreateInvoice: React.Dispatch<React.SetStateAction<boolean>>;
   invoice: Invoice;
   type: string;
-}
-
-interface Item {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-  id: string;
 }
 
 interface Invoice {
@@ -53,11 +46,11 @@ interface Invoice {
     postCode: string;
     country: string;
   };
-  items: Item[];
+  items: InvoiceItem[];
 }
 
 const CreateInvoice: React.FC<Props> = ({
-  openCreateInvoice,
+  // openCreateInvoice,
   setOpenCreateInvoice,
   invoice,
   type,
@@ -92,7 +85,7 @@ const CreateInvoice: React.FC<Props> = ({
   const [selectDeliveryDate, setSelectDeliveryDate] = useState("");
   const [paymentTerms, setpaymentTerms] = useState(deliveryTimes[0].value);
 
-  const [item, setItem] = useState<Item[]>([
+  const [item, setItem] = useState<InvoiceItem[]>([
     {
       name: "",
       quantity: 1,
@@ -101,6 +94,7 @@ const CreateInvoice: React.FC<Props> = ({
       id: uuidv4(),
     },
   ]);
+  //DELETE
   const onDelete = (id: string) => {
     setItem((prevState) => prevState.filter((el) => el.id !== id));
   };
@@ -114,96 +108,124 @@ const CreateInvoice: React.FC<Props> = ({
     let foundData = data.find((el) => el.id === id);
 
     if (foundData) {
-      if (e.target.name === "name") {
-        foundData.name = e.target.value;
-      } else if (e.target.name === "quantity") {
-        foundData.quantity = parseInt(e.target.value);
-        foundData.total = foundData.quantity * foundData.price;
-      } else if (e.target.name === "price") {
-        foundData.price = parseInt(e.target.value);
-        foundData.total = foundData.quantity * foundData.price;
+      if (e.target.name === "quantity" || e.target.name === "price") {
+        foundData[e.target.name as keyof typeof foundData] = Number(
+          e.target.value
+        ) as never;
+        foundData.total = (foundData.quantity * foundData.price).toFixed(2);
+      } else {
+        foundData[e.target.name as keyof typeof foundData] = e.target
+          .value as never;
       }
+
+      setItem(data);
     }
-
-    setItem(data);
   };
 
-  const handleAddItem = () => {
-    setItem((prevState) => [
-      ...prevState,
-      {
-        name: "",
-        quantity: 1,
-        price: 0,
-        total: 0,
-        id: uuidv4(),
-      },
-    ]);
-  };
+  const onSubmit = () => {
+    console.log("submitted");
+    if (type === "edit") {
+      const updatedItemsArray: InvoiceItem[] = item.map((obj) => ({
+        ...obj,
+        total: Number(obj.total),
+      }));
 
-  const handleCreateInvoice = () => {
-    setIsValidatorActive(true);
-
-    // Validate inputs
-    const isSenderStreetValid = validateSenderStreetAddress(senderStreet);
-    const isSenderCityValid = validateSenderCity(senderCity);
-    const isSenderPostCodeValid = validateSenderPostCode(senderPostCode);
-    const isSenderCountryValid = validateSenderCountry(senderCountry);
-
-    const isClientNameValid = validateClientName(clientName);
-    const isClientEmailValid = validateClientEmail(clientEmail);
-    const isClientStreetValid = validateClientStreetAddress(clientStreet);
-    const isClientCityValid = validateClientCity(clientCity);
-    const isClientPostCodeValid = validateClientPostCode(clientPostCode);
-    const isClientCountryValid = validateClientCountry(clientCountry);
-
-    const isItemCountValid = validateItemCount(item.length);
-    const isItemNameValid = item.every((el) => validateItemName(el.name));
-    const isItemPriceValid = item.every((el) => validateItemPrice(el.price));
-
-    const isValid =
-      isSenderStreetValid &&
-      isSenderCityValid &&
-      isSenderPostCodeValid &&
-      isSenderCountryValid &&
-      isClientNameValid &&
-      isClientEmailValid &&
-      isClientStreetValid &&
-      isClientCityValid &&
-      isClientPostCodeValid &&
-      isClientCountryValid &&
-      isItemCountValid &&
-      isItemNameValid &&
-      isItemPriceValid;
-
-    setIsValid(isValid);
-
-    if (isValid) {
-      const newInvoice: Invoice = {
-        id: invoice.id,
-        clientName: clientName,
-        clientAddress: {
-          city: clientCity,
-          street: clientStreet,
-          postCode: clientPostCode,
-          country: clientCountry,
-        },
-        clientEmail: clientEmail,
-        paymentTerms: paymentTerms,
-        description: description,
-        senderAddress: {
-          city: senderCity,
-          street: senderStreet,
-          postCode: senderPostCode,
-          country: senderCountry,
-        },
-        items: item,
-      };
-
-      dispatch(invoiceSlice.actions.updateInvoice(newInvoice));
+      dispatch(
+        invoiceSlice.actions.editInvoice({
+          description,
+          paymentTerms,
+          clientName,
+          clientEmail,
+          senderStreet,
+          senderCity,
+          senderPostCode,
+          senderCountry,
+          clientStreet,
+          clientCity,
+          clientPostCode,
+          clientCountry,
+          item: updatedItemsArray,
+          id: invoice.id,
+        })
+      );
       setOpenCreateInvoice(false);
+    } else {
+      const invoiceItems: InvoiceItem[] = item.map((obj) => ({
+        ...obj,
+        total: Number(obj.total),
+      }));
+
+      dispatch(
+        invoiceSlice.actions.addInvoice({
+          description,
+          paymentTerms,
+          clientName,
+          clientEmail,
+          senderStreet,
+          senderCity,
+          senderPostCode,
+          senderCountry,
+          clientStreet,
+          clientCity,
+          clientPostCode,
+          clientCountry,
+          item: invoiceItems,
+        })
+      );
+      dispatch(invoiceSlice.actions.filterInvoice({ status: filterValue }));
     }
   };
+  if (type === "edit" && isFirstLoad) {
+    const updatedItemsArray = invoice.items.map((obj, index) => {
+      return { ...obj, id: index + 1 };
+    });
+
+    setClientName(invoice.clientName);
+    setClientCity(invoice.clientAddress.city);
+    setClientStreet(invoice.clientAddress.street);
+    setClientPostCode(invoice.clientAddress.postCode);
+    setClientCountry(invoice.clientAddress.country);
+    setClientEmail(invoice.clientEmail);
+    setpaymentTerms(invoice.paymentTerms);
+    setDescription(invoice.description);
+    setSenderCity(invoice.senderAddress.city);
+    setSenderStreet(invoice.senderAddress.street);
+    setSenderCountry(invoice.senderAddress.country);
+    setSenderPostCode(invoice.senderAddress.postCode);
+    setItem(updatedItemsArray);
+
+    setIsFirstLoad(false);
+  }
+
+  function itemsValidator() {
+    const itemName = item.map((i) => validateItemName(i.name));
+    const itemCount = item.map((i) => validateItemCount(i.quantity));
+    const itemPrice = item.map((i) => validateItemPrice(i.price));
+
+    const allItemsElement = itemCount.concat(itemPrice, itemName);
+
+    return allItemsElement.includes(false) === true ? false : true;
+  }
+
+  function validator() {
+    if (
+      validateSenderStreetAddress(senderStreet) &&
+      validateSenderPostCode(senderPostCode) &&
+      validateSenderCity(senderCity) &&
+      validateClientEmail(clientEmail) &&
+      validateClientName(clientName) &&
+      validateClientCity(clientCity) &&
+      validateClientPostCode(clientPostCode) &&
+      validateClientStreetAddress(clientStreet) &&
+      validateSenderCountry(senderCountry) &&
+      validateClientCountry(clientCountry) &&
+      itemsValidator()
+    ) {
+      return true;
+    }
+
+    return false;
+  }
 
   return (
     <div
@@ -229,14 +251,14 @@ const CreateInvoice: React.FC<Props> = ({
           },
         }}
         exit={{ x: -700, transition: { duration: 0.2 } }}
-        className="dark:text-white bg-white flex h-screen flex-col px-6 py-16 scrollbar-hide dark:bg-[#141625] md:w-[768px] md:rounded-r-3xl md:pl-[150px]"
+        className="flex h-screen flex-col bg-light px-6 py-16 scrollbar-hide dark:bg-dark dark:text-light md:w-[768px] md:rounded-r-3xl md:pl-[150px]"
       >
-        <h1 className="dark:text-white text-3xl font-semibold">
+        <h1 className="text-3xl font-semibold text-dark dark:text-light">
           {type == "edit" ? "Edit" : "Create"} Invoice
         </h1>
 
         <div className=" my-14 overflow-y-scroll scrollbar-hide">
-          <h1 className=" mb-4 font-medium text-[#7c5dfa]">Bill From</h1>
+          <h1 className=" mb-4 font-medium text-accentColor">Bill From</h1>
 
           <div className=" mx-1 grid grid-cols-3  space-y-4 ">
             <div className=" col-span-3 flex flex-col">
@@ -248,10 +270,10 @@ const CreateInvoice: React.FC<Props> = ({
                 id="senderStreet"
                 onChange={(e) => setSenderStreet(e.target.value)}
                 type="text"
-                className={`focus:outline-purple-400 border-gray-300 dark:border-gray-800 rounded-lg border-[.2px]  px-4 py-2 focus:outline-none  dark:bg-[#1e2139] ${
+                className={`border-gray-300 dark:border-gray-800 rounded-lg border-[.2px] px-4  py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderStreetAddress(senderStreet) &&
-                  " border-red-500 dark:border-red-500 outline-red-500 border-2"
+                  "border-red-500 dark:border-red-500 outline-red-500 border-2"
                 }`}
               />
             </div>
@@ -262,7 +284,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={senderCity}
                 onChange={(e) => setSenderCity(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4 py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderCity(senderCity) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -275,7 +297,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={senderPostCode}
                 onChange={(e) => setSenderPostCode(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2 focus:outline-none  focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderPostCode(senderPostCode) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -288,7 +310,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={senderCountry}
                 onChange={(e) => setSenderCountry(e.target.value)}
-                className={`focus:outline-purple-400 rounded-lg border-[.2px] px-4 py-2  focus:outline-none  dark:bg-[#1e2139] ${
+                className={`rounded-lg border-[.2px] px-4 py-2 focus:outline-none  focus:outline-accentColor  dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderCountry(senderCountry) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -299,7 +321,7 @@ const CreateInvoice: React.FC<Props> = ({
 
           {/* Bill to Section */}
 
-          <h1 className="my-4 mt-10 font-medium text-[#7c5dfa]">Bill To</h1>
+          <h1 className="my-4 mt-10 font-medium text-accentColor">Bill To</h1>
 
           <div className="mx-1 grid grid-cols-3 space-y-4 ">
             <div className="col-span-3 flex flex-col">
@@ -308,7 +330,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientName(clientName) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -322,7 +344,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientEmail(clientEmail) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -336,7 +358,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientStreet}
                 onChange={(e) => setClientStreet(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientStreetAddress(clientStreet) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -350,7 +372,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientCity}
                 onChange={(e) => setClientCity(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientCity(clientCity) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -363,7 +385,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientPostCode}
                 onChange={(e) => setClientPostCode(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientPostCode(clientPostCode) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -376,7 +398,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="text"
                 value={clientCountry}
                 onChange={(e) => setClientCountry(e.target.value)}
-                className={`focus:outline-purple-400 border-gray-300 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139] ${
+                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientCountry(clientCountry) &&
                   "border-red-500 dark:border-red-500 outline-red-500 border-2"
@@ -392,7 +414,7 @@ const CreateInvoice: React.FC<Props> = ({
                 type="date"
                 value={selectDeliveryDate}
                 onChange={(e) => setSelectDeliveryDate(e.target.value)}
-                className="focus:outline-purple-400 border-gray-300 dark:border-gray-800 dark:text-white mr-4 rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139]"
+                className="border-gray-300 dark:border-gray-800 mr-4 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light"
               />
             </div>
 
@@ -400,8 +422,9 @@ const CreateInvoice: React.FC<Props> = ({
               <label className="text-gray-400 font-light">Payment Terms</label>
               <select
                 value={paymentTerms}
-                onChange={(e) => setpaymentTerms(e.target.value)}
-                className="dark:text-white dark:border-gray-800 focus:outline-purple-400 border-gray-300 select-status w-full appearance-none  rounded-lg border-[.2px] px-4  py-2 focus:outline-none dark:bg-[#1e2139]"
+                onChange={(e) => setpaymentTerms(Number(e.target.value))}
+                // onChange={(e) => setpaymentTerms(e.target.value)}
+                className="dark:border-gray-800 border-gray-300 select-terms w-full appearance-none rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light"
               >
                 {deliveryTimes.map((time) => (
                   <option value={time.value}>{time.text}</option>
@@ -416,15 +439,15 @@ const CreateInvoice: React.FC<Props> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               type="text"
-              className=" focus:outline-purple-400 border-gray-300 dark:border-gray-800 dark:text-white rounded-lg border-[.2px]   px-4 py-2 focus:outline-none dark:bg-[#1e2139]"
+              className=" border-gray-300 dark:border-gray-800 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light"
             />
           </div>
 
           {/* Item List Section */}
 
-          <h2 className=" text-gray-500 mt-10 text-2xl ">Item List</h2>
+          <h2 className="text-gray-500 mt-10 text-2xl ">Item List</h2>
           {item.map((itemDetails, index) => (
-            <div className=" border-gray-300 mb-4 border-b pb-2 ">
+            <div className="border-gray-300 mb-4 border-b pb-2 ">
               <AddItem
                 isValidatorActive={isValidatorActive}
                 key={index}
@@ -449,19 +472,19 @@ const CreateInvoice: React.FC<Props> = ({
                 },
               ]);
             }}
-            className=" bg-gray-200  dark:text-white mx-auto mt-6 w-full items-center justify-center rounded-xl py-2  hover:opacity-80 dark:bg-[#252945]"
+            className="bg-gray-200 mx-auto mt-6 w-full items-center justify-center rounded-xl py-2 hover:opacity-80 dark:bg-darkSecondary dark:text-light"
           >
             + Add New Item
           </button>
         </div>
 
-        <div className=" flex  justify-between">
+        <div className="flex justify-between">
           <div>
             <button
               onClick={() => {
                 setOpenCreateInvoice(false);
               }}
-              className=" bg-gray-200  dark:text-white mx-auto items-center justify-center rounded-full  px-8 py-4  hover:opacity-80 dark:bg-[#252945] "
+              className="bg-gray-200 mx-auto items-center justify-center rounded-full px-8 py-4 hover:opacity-80 dark:bg-darkSecondary dark:text-light "
             >
               Discard
             </button>
@@ -469,7 +492,7 @@ const CreateInvoice: React.FC<Props> = ({
 
           <div>
             <button
-              className=" text-white  mx-auto items-center justify-center rounded-full bg-[#7c5dfa] px-8  py-4 hover:opacity-80 "
+              className="mx-auto items-center justify-center rounded-full bg-accentColor px-8 py-4 text-light hover:opacity-80 "
               onClick={() => {
                 const isValid = validator();
                 setIsValidatorActive(true);
