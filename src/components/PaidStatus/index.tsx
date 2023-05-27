@@ -6,10 +6,7 @@ function PaidStatus({ type }: Props) {
   const classNames = {
     paid: ['text-green bg-[#33d69f0f]', 'bg-green'],
     pending: ['text-orange bg-[#ff8f000f]', 'bg-orange'],
-    draft: [
-      'text-gray bg-[#dfe3fa8f] text-[#8a99ed] dark:text-bluish',
-      'bg-bluish',
-    ],
+    draft: ['bg-[#dfe3fa8f] text-[#8a99ed] dark:text-bluish', 'bg-bluish'],
   };
   return (
     <div
