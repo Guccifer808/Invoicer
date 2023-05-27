@@ -247,7 +247,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 id='senderStreet'
                 onChange={(e) => setSenderStreet(e.target.value)}
                 type='text'
-                className={`border-gray-300 dark:border-gray-800 rounded-lg border-[.2px] px-4  py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:border-gray dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderStreetAddress(senderStreet) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
@@ -261,11 +261,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={senderCity}
                 onChange={(e) => setSenderCity(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderCity(senderCity) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                } dark:border-gray-800`}
+                } dark:border-gray`}
               />
             </div>
             <div className='col-span-1 mr-4 flex flex-col'>
@@ -274,11 +274,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={senderPostCode}
                 onChange={(e) => setSenderPostCode(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2 focus:outline-none  focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none  focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateSenderPostCode(senderPostCode) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                } dark:border-gray-800`}
+                } dark:border-gray`}
               />
             </div>
             <div className='col-span-1 flex flex-col'>
@@ -291,7 +291,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                   isValidatorActive &&
                   !validateSenderCountry(senderCountry) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                } border-gray-300 dark:border-gray-800`}
+                } border-bluish dark:border-gray`}
               />
             </div>
           </div>
@@ -307,11 +307,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientName(clientName) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
 
@@ -321,11 +321,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientEmail(clientEmail) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
 
@@ -335,11 +335,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientStreet}
                 onChange={(e) => setClientStreet(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientStreetAddress(clientStreet) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
 
@@ -349,11 +349,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientCity}
                 onChange={(e) => setClientCity(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientCity(clientCity) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
             <div className='col-span-1 mr-4 flex flex-col'>
@@ -362,11 +362,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientPostCode}
                 onChange={(e) => setClientPostCode(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientPostCode(clientPostCode) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
             <div className='col-span-1 flex flex-col'>
@@ -375,11 +375,11 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='text'
                 value={clientCountry}
                 onChange={(e) => setClientCountry(e.target.value)}
-                className={`border-gray-300 rounded-lg border-[.2px] px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+                className={`rounded-lg border-[.2px] border-bluish px-4 py-2  focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                   isValidatorActive &&
                   !validateClientCountry(clientCountry) &&
                   'border-red-500 dark:border-red-500 outline-red-500 border-2'
-                }   dark:border-gray-800`}
+                }   dark:border-gray`}
               />
             </div>
           </div>
@@ -391,7 +391,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 type='date'
                 value={selectDeliveryDate}
                 onChange={(e) => setSelectDeliveryDate(e.target.value)}
-                className='border-gray-300 dark:border-gray-800 mr-4 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light'
+                className='mr-4 rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:border-gray dark:bg-darkSecondary dark:text-light'
               />
             </div>
 
@@ -401,7 +401,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
                 value={paymentTerms}
                 onChange={(e) => setpaymentTerms(Number(e.target.value))}
                 // onChange={(e) => setpaymentTerms(e.target.value)}
-                className='dark:border-gray-800 border-gray-300 select-terms w-full appearance-none rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light'
+                className='select-terms w-full appearance-none rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:border-gray dark:bg-darkSecondary dark:text-light'
               >
                 {deliveryTimes.map((time) => (
                   <option value={time.value} key={time.value}>
@@ -418,7 +418,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               type='text'
-              className='border-gray-300 dark:border-gray-800 rounded-lg border-[.2px] px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary dark:text-light'
+              className='rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:border-gray dark:bg-darkSecondary dark:text-light'
             />
           </div>
 
@@ -427,7 +427,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({
           <h2 className='text-gray-500 mt-10 text-2xl '>Item List</h2>
           {item.map((itemDetails) => (
             <div
-              className='border-gray-300 mb-4 border-b pb-2'
+              className='mb-4 border-b border-bluish pb-2'
               key={itemDetails.id}
             >
               <AddItem

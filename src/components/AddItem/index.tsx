@@ -34,11 +34,11 @@ const AddItem: React.FC<AddItemProps> = ({
               }}
               value={itemDetails.name}
               type='text'
-              className={`rounded-lg border-[.2px] border-gray px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+              className={`rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                 isValidatorActive &&
                 !validateItemName(itemDetails.name) &&
                 'border-2 border-red outline-red dark:border-red'
-              }   dark:border-gray`}
+              }   dark:border-bluish`}
             />
           </div>
 
@@ -52,11 +52,11 @@ const AddItem: React.FC<AddItemProps> = ({
               }}
               value={itemDetails.quantity}
               min={0}
-              className={`max-w-[60px] rounded-lg border-[.2px] border-gray px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+              className={`max-w-[60px] rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                 isValidatorActive &&
                 !validateItemCount(itemDetails.quantity) &&
                 'border-2 border-red outline-red dark:border-red'
-              }   dark:border-gray`}
+              }   dark:border-bluish`}
             />
           </div>
 
@@ -70,7 +70,7 @@ const AddItem: React.FC<AddItemProps> = ({
               }}
               value={itemDetails.price}
               min={0}
-              className={`max-w-[100px] rounded-lg border-[.2px] border-gray px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
+              className={`max-w-[100px] rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:bg-darkSecondary ${
                 isValidatorActive &&
                 !validateItemPrice(itemDetails.price) &&
                 'border-2 border-red outline-red dark:border-red'
@@ -80,7 +80,7 @@ const AddItem: React.FC<AddItemProps> = ({
 
           <div className='flex flex-col items-start px-2 py-2'>
             <h1>Total</h1>
-            <div className='dark:text-white max-w-[100px] rounded-lg border-[.2px] border-gray px-4 py-2 focus:outline-none focus:outline-accentColor dark:border-gray dark:bg-darkSecondary'>
+            <div className='dark:text-white max-w-[100px] rounded-lg border-[.2px] border-bluish px-4 py-2 focus:outline-none focus:outline-accentColor dark:border-bluish dark:bg-darkSecondary'>
               {itemDetails.total}
             </div>
           </div>
