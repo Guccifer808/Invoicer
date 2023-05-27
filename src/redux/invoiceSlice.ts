@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import mockData from 'src/mockData/mockData.json';
-import moment from "moment";
-import getForwardDate from "src/utils/forwardDate";
-import generateID from "src/utils/generateId";
+import moment from 'moment';
+import getForwardDate from 'src/utils/forwardDate';
+import generateID from 'src/utils/generateId';
 
-import {Invoice, InvoiceItem, InvoiceState} from 'src/types/types'
+import { Invoice, InvoiceItem, InvoiceState } from 'src/types/types';
 
-const today = moment().format("YYYY-MM-DD");
+const today = moment().format('YYYY-MM-DD');
 
 const invoiceSlice = createSlice({
-  name: "invoices",
+  name: 'invoices',
 
   initialState: {
     allInvoices: mockData as Invoice[],
@@ -20,13 +20,13 @@ const invoiceSlice = createSlice({
   reducers: {
     filterInvoice: (state, action: PayloadAction<{ status: string }>) => {
       const { allInvoices } = state;
-      if (action.payload.status === "") {
+      if (action.payload.status === '') {
         state.filteredInvoice = allInvoices;
       } else {
         const filteredData = allInvoices.filter((invoice) => {
           return invoice.status === action.payload.status;
         });
-        console.log(filteredData);
+        // console.log(filteredData);
         state.filteredInvoice = filteredData;
       }
     },
@@ -44,7 +44,10 @@ const invoiceSlice = createSlice({
         allInvoices.splice(index, 1);
       }
     },
-    updateInvoiceStatus: (state, action: PayloadAction<{ id: string, status: string }>) => {
+    updateInvoiceStatus: (
+      state,
+      action: PayloadAction<{ id: string; status: string }>
+    ) => {
       const { id, status } = action.payload;
       const invoiceToUpdate = state.allInvoices.find(
         (invoice) => invoice.id === id
@@ -53,21 +56,24 @@ const invoiceSlice = createSlice({
         invoiceToUpdate.status = status;
       }
     },
-    addInvoice: (state, action: PayloadAction<{
-      description: string;
-      paymentTerms: number;
-      clientName: string;
-      clientEmail: string;
-      senderStreet: string;
-      senderCity: string;
-      senderPostCode: string;
-      senderCountry: string;
-      clientStreet: string;
-      clientCity: string;
-      clientPostCode: string;
-      clientCountry: string;
-      item: InvoiceItem[];
-    }>) => {
+    addInvoice: (
+      state,
+      action: PayloadAction<{
+        description: string;
+        paymentTerms: number;
+        clientName: string;
+        clientEmail: string;
+        senderStreet: string;
+        senderCity: string;
+        senderPostCode: string;
+        senderCountry: string;
+        clientStreet: string;
+        clientCity: string;
+        clientPostCode: string;
+        clientCountry: string;
+        item: InvoiceItem[];
+      }>
+    ) => {
       const {
         description,
         paymentTerms,
@@ -92,7 +98,7 @@ const invoiceSlice = createSlice({
         paymentTerms: paymentTerms,
         clientName: clientName,
         clientEmail: clientEmail,
-        status: "pending",
+        status: 'Pending',
         senderAddress: {
           street: senderStreet,
           city: senderCity,
@@ -105,29 +111,35 @@ const invoiceSlice = createSlice({
           postCode: clientPostCode,
           country: clientCountry,
         },
-        items: item,
+        items: item.map((item) => ({
+          ...item,
+          total: Number(item.total),
+        })),
         total: item.reduce((acc, i) => {
           return acc + Number(i.total);
         }, 0),
       };
       state.allInvoices.push(finalData);
     },
-    editInvoice: (state, action: PayloadAction<{
-      description: string;
-      paymentTerms: number;
-      clientName: string;
-      clientEmail: string;
-      senderStreet: string;
-      senderCity: string;
-      senderPostCode: string;
-      senderCountry: string;
-      clientStreet: string;
-      clientCity: string;
-      clientPostCode: string;
-      clientCountry: string;
-      item: InvoiceItem[];
-      id: string;
-    }>) => {
+    editInvoice: (
+      state,
+      action: PayloadAction<{
+        description: string;
+        paymentTerms: number;
+        clientName: string;
+        clientEmail: string;
+        senderStreet: string;
+        senderCity: string;
+        senderPostCode: string;
+        senderCountry: string;
+        clientStreet: string;
+        clientCity: string;
+        clientPostCode: string;
+        clientCountry: string;
+        item: InvoiceItem[];
+        id: string;
+      }>
+    ) => {
       const { allInvoices } = state;
       const {
         description,
@@ -146,7 +158,9 @@ const invoiceSlice = createSlice({
         id,
       } = action.payload;
 
-      const invoiceIndex = allInvoices.findIndex((invoice) => invoice.id === id);
+      const invoiceIndex = allInvoices.findIndex(
+        (invoice) => invoice.id === id
+      );
       const editedObject = {
         description: description,
         paymentTerms: paymentTerms,
@@ -171,9 +185,15 @@ const invoiceSlice = createSlice({
       };
 
       if (invoiceIndex !== -1) {
+        const updatedItemsArray = editedObject.items.map((item) => ({
+          ...item,
+          total: Number(item.total),
+        }));
+
         allInvoices[invoiceIndex] = {
           ...allInvoices[invoiceIndex],
-          ...editedObject
+          ...editedObject,
+          items: updatedItemsArray,
         };
       }
     },

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.select-terms{
-    background-image: url("src/assets/icon-arrow-d.svg");
-    appearance: none;
-    background-repeat: no-repeat;
-    background-position: right 16px top 50%;
-  }
+.select-terms {
+  background-image: url('src/assets/icon-arrow-d.svg');
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 16px top 50%;
+}

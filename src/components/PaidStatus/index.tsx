@@ -1,28 +1,31 @@
 type Props = {
-  type: any;
+  type: string;
 };
 
 function PaidStatus({ type }: Props) {
   const classNames = {
-    paid: ["text-[#33d69f] bg-[#33d69f0f]", "bg-[#33d69f]"],
-    pending: ["text-[#ff8f00] bg-[#ff8f000f]", "bg-[#ff8f00]"],
-    draft: ["text-[#dfe3fa] bg-[#dfe3fa0f]", "bg-[#dfe3fa]"],
+    paid: ['text-green bg-[#33d69f0f]', 'bg-green'],
+    pending: ['text-orange bg-[#ff8f000f]', 'bg-orange'],
+    draft: [
+      'text-gray bg-[#dfe3fa8f] text-[#8a99ed] dark:text-bluish',
+      'bg-bluish',
+    ],
   };
   return (
     <div
       className={`${
-        type === "paid"
+        type === 'Paid'
           ? classNames.paid[0]
-          : type === "pending"
+          : type === 'Pending'
           ? classNames.pending[0]
           : classNames.draft[0]
       } flex items-center justify-center space-x-2 rounded-lg px-4 py-2`}
     >
       <div
-        className={` h-3 w-3 rounded-full  ${
-          type === "paid"
+        className={`h-3 w-3 rounded-full ${
+          type === 'Paid'
             ? classNames.paid[1]
-            : type === "pending"
+            : type === 'Pending'
             ? classNames.pending[1]
             : classNames.draft[1]
         } `}
