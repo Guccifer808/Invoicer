@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import invoiceSlice from 'src/redux/invoiceSlice';
 import CreateInvoice from '../CreateInvoice';
 import { useLocation } from 'react-router-dom';
-import { Invoice, RootState } from 'src/types/types';
+import { Invoice, RootState } from 'src/interface/interface';
 
 const Main: React.FC = () => {
   const location = useLocation();

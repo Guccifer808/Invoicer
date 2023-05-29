@@ -4,7 +4,7 @@ import moment from 'moment';
 import getForwardDate from 'src/utils/forwardDate';
 import generateID from 'src/utils/generateId';
 
-import { Invoice, InvoiceItem, InvoiceState } from 'src/types/types';
+import { Invoice, InvoiceItem, InvoiceState } from 'src/interface/interface';
 
 const today = moment().format('YYYY-MM-DD');
 

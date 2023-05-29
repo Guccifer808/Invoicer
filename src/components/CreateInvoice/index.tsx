@@ -19,7 +19,7 @@ import {
   validateSenderCountry,
   validateClientCountry,
 } from 'src/utils/createInvoiceValidator';
-import { Invoice, InvoiceItem, ItemDetails } from 'src/types/types';
+import { Invoice, InvoiceItem, ItemDetails } from 'src/interface/interface';
 
 interface CreateInvoiceProps {
   // openCreateInvoice?: boolean;

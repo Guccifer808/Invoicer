@@ -1,4 +1,4 @@
-import { DeleteModalProps } from 'src/types/types';
+import { DeleteModalProps } from 'src/interface/interface';
 
 const DeleteModal: React.FC<DeleteModalProps> = ({
   invoiceId,

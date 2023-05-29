@@ -2,7 +2,7 @@ import PaidStatus from '../PaidStatus';
 import rightArrow from 'src/assets/icon-arrow-r.svg';
 import { Link } from 'react-router-dom';
 
-import { Invoice } from 'src/types/types';
+import { Invoice } from 'src/interface/interface';
 
 type InvoiceCardProps = {
   invoice: Invoice;

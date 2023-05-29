@@ -1,5 +1,5 @@
 import { TrashIcon } from '@heroicons/react/24/solid';
-import { ItemDetails } from 'src/types/types';
+import { ItemDetails } from 'src/interface/interface';
 import {
   validateItemCount,
   validateItemName,

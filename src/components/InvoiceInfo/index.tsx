@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import formatDate from 'src/utils/formatDate';
 import DeleteModal from '../DeleteModal';
 import CreateInvoice from '../CreateInvoice';
-import { Invoice, Item } from 'src/types/types';
+import { Invoice, Item } from 'src/interface/interface';
 import { RootState } from 'src/redux/store';
 import invoiceSlice from 'src/redux/invoiceSlice';
 
